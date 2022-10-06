@@ -1,10 +1,9 @@
 package com.rachein.laoshixiangmu.config;
 
-import com.baomidou.mybatisplus.generator.IFill;
 import com.rachein.laoshixiangmu.entity.DB.Website;
 import com.rachein.laoshixiangmu.entity.DB.WebsiteRecord;
 import com.rachein.laoshixiangmu.redis.RedisService;
-import com.rachein.laoshixiangmu.redis.myPrefixKey.WebsiteRecordKey;
+import com.rachein.laoshixiangmu.redis.myPrefixKey.WebsiteKey;
 import com.rachein.laoshixiangmu.service.IWebsiteRecordService;
 import com.rachein.laoshixiangmu.service.IWebsiteService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +19,7 @@ import java.util.stream.Collectors;
  * @Date 2022/10/2
  * @Description 开启服务器后 自动初始化数据类
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class AutoInitialConfig {
 
@@ -35,7 +32,7 @@ public class AutoInitialConfig {
     @Autowired
     private RedisService redisService;
 
-    @Bean
+//    @Bean
     public void initR() {
         websiteRecordInit();        //初始化记录浏览量的模块
     }
@@ -45,7 +42,7 @@ public class AutoInitialConfig {
      * 对于记录浏览量的模块，需要读取数据库的总操作数，复制到redis中：
      * 如果记录表中 不存在对应的网页记录，那么就初始化一个进去;
      */
-    @Bean
+//    @Bean
     public void websiteRecordInit() {
         log.info(">>>>>>>>>>>>>>>>>>>>>> 网页记录初始化【开始】");
         //获取网页列表：
@@ -72,7 +69,7 @@ public class AutoInitialConfig {
                 log.error(">>>>>>>>>>>>>> 插入新的网页的记录，成功！");
             }
             //redis中添加记录:
-            redisService.set(WebsiteRecordKey.TOTAL, websiteId.toString(), count);
+            redisService.set(WebsiteKey.TOTAL, websiteId.toString(), count);
             log.info("网页记录初始化【结束】<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
     }

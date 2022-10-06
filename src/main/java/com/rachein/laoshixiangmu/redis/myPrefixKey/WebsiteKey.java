@@ -7,22 +7,24 @@ import com.rachein.laoshixiangmu.redis.BasePrefix;
  * @Date 2022/10/2
  * @Description
  */
-public class WebsiteRecordKey extends BasePrefix {
+public class WebsiteKey extends BasePrefix {
 
     public static final int TOKEN_EXPIRE = 0;
-    public static final String NAME = "total";
+    public static final String RECORD_TOTAL = "record-total";
+    public static final String CATEGORY = "-category";
 
     /**
      * 防止被外面实例化
      * @param expireSeconds
      * @param prefix
      */
-    private WebsiteRecordKey(int expireSeconds, String prefix) {super(expireSeconds, prefix);}
+    private WebsiteKey(int expireSeconds, String prefix) {super(expireSeconds, prefix);}
 
     /**
      * 需要缓存的字段：
      */
     //某个网页的总浏览次数
-    public static WebsiteRecordKey TOTAL = new WebsiteRecordKey(TOKEN_EXPIRE,NAME);
+    public static WebsiteKey TOTAL = new WebsiteKey(TOKEN_EXPIRE, RECORD_TOTAL);
+    public static WebsiteKey WEBSITE = new WebsiteKey(TOKEN_EXPIRE, CATEGORY);
 
 }

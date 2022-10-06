@@ -18,7 +18,7 @@ public class Website {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     private String name;
-    private Boolean status;
+    private Integer status;
     private LocalDateTime gmtCreate;
     private LocalDateTime gmtModified;
 }

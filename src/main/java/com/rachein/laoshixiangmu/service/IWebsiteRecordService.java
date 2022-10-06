@@ -16,7 +16,7 @@ public interface IWebsiteRecordService extends IService<WebsiteRecord> {
      */
     void saveByName(String resource);
 
-    void getByName(String name);
+    Integer getByName(String name);
 
 
 }
